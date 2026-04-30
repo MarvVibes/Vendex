@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendex Admin — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f10; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-card {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+    .login-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #0f0f10;
+    }
+    .login-subtitle {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-size: 0.8rem; font-weight: 500; color: #444; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    input {
+      width: 100%; padding: 0.875rem 1rem; border: 1px solid #e5e7eb;
+      border-radius: 6px; font-family: inherit; font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    input:focus { border-color: #0f0f10; }
+    .btn-login {
+      width: 100%; padding: 1rem; background: #0f0f10; color: white;
+      border: none; border-radius: 6px; font-family: inherit;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      letter-spacing: 1px; text-transform: uppercase;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .btn-login:hover { background: #333; }
+    .btn-login:active { transform: scale(0.98); }
+    .error-msg {
+      background: #fef2f2; border: 1px solid #fecaca; color: #dc2626;
+      padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.85rem;
+      margin-bottom: 1rem; display: none;
+    }
+    .divider { text-align: center; color: #bbb; font-size: 0.8rem; margin: 1.5rem 0; }
+    .btn-signup {
+      width: 100%; padding: 0.875rem; background: transparent; color: #0f0f10;
+      border: 1px solid #e5e7eb; border-radius: 6px; font-family: inherit;
+      font-size: 0.9rem; font-weight: 500; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-signup:hover { border-color: #0f0f10; background: #f9fafb; }
+    .back-link { text-align: center; margin-top: 1.5rem; }
+    .back-link a { font-size: 0.82rem; color: #888; text-decoration: none; }
+    .back-link a:hover { color: #0f0f10; }
+    .loading { opacity: 0.7; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-logo">VENDEX</div>
+    <div class="login-subtitle">Admin Dashboard</div>
+    <div class="error-msg" id="error-msg"></div>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="admin@vendex.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-login" id="login-btn">Sign In</button>
+    </form>
+    <div class="back-link"><a href="../index.html">← Back to Storefront</a></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script>
+    // Redirect if already logged in as admin
+    (async () => {
+      const session = await VendexDB.getSession();
+      if (session) {
+        const profile = await VendexDB.getProfile(session.user.id);
+        if (profile?.is_admin) window.location.href = 'dashboard.html';
+      }
+    })();
+
+    const errorMsg = document.getElementById('error-msg');
+    function showError(msg) { errorMsg.textContent = msg; errorMsg.style.display = 'block'; }
+    function hideError() { errorMsg.style.display = 'none'; }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+      const btn = document.getElementById('login-btn');
+      const originalText = btn.textContent;
+      btn.textContent = 'Authenticating...';
+      btn.disabled = true;
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      const result = await VendexDB.signIn(email, password);
+      
+      if (!result.success) {
+        showError(result.error || 'Invalid credentials');
+        btn.textContent = originalText;
+        btn.disabled = false;
+        return;
+      }
+
+      // Final check: Is this user actually an admin?
+      const profile = await VendexDB.getProfile(result.user.id);
+      if (!profile?.is_admin) {
+        await VendexDB.signOut();
+        showError('Access denied. This account does not have administrative privileges.');
+        btn.textContent = originalText;
+        btn.disabled = false;
+        return;
+      }
+
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

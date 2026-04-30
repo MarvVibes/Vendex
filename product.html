@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Beige Trench Coat | Vendex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Product Detail Layout */
+        .product-detail-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-top: 2rem; }
+        .gallery { display: flex; gap: 1rem; }
+        .thumbnails { display: flex; flex-direction: column; gap: 0.75rem; width: 80px; flex-shrink: 0; }
+        .thumb { width: 100%; aspect-ratio: 3/4; object-fit: cover; cursor: pointer; opacity: 0.6; transition: 0.3s; border: 1px solid transparent; }
+        .thumb:hover, .thumb.active { opacity: 1; border-color: var(--primary-color); }
+        .main-image { flex: 1; background: #f7f7f7; overflow: hidden; }
+        .main-image img { width: 100%; height: auto; display: block; }
+        .detail-info h1 { font-size: 2rem; margin-bottom: 0.5rem; line-height: 1.2; }
+        .detail-price { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 500; }
+        .detail-desc { color: var(--text-light); margin-bottom: 2rem; line-height: 1.7; }
+        .selector { margin-bottom: 2rem; }
+        .selector h4 { font-family: var(--font-sans); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .size-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .size-btn { width: 44px; height: 44px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
+        .size-btn:hover, .size-btn.active { border-color: var(--primary-color); background: var(--primary-color); color: white; }
+        .add-to-cart-large { width: 100%; padding: 1.25rem; font-size: 1rem; margin-bottom: 2rem; }
+        .accordion { border-top: 1px solid var(--border-color); }
+        .accordion-item { border-bottom: 1px solid var(--border-color); padding: 1.125rem 0; cursor: pointer; font-weight: 500; display: flex; justify-content: space-between; font-size: 0.9rem; }
+        .back-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-light); padding: 0; margin-bottom: 2rem; }
+        .back-btn:hover { color: var(--primary-color); }
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .product-detail-layout { gap: 2.5rem; }
+            .detail-info h1 { font-size: 1.75rem; }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .product-detail-layout { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1rem; }
+            .gallery { flex-direction: column-reverse; gap: 0.75rem; }
+            .thumbnails { flex-direction: row; width: 100%; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem; }
+            .thumb { width: 64px; height: 80px; flex-shrink: 0; }
+            .main-image { min-height: 320px; max-height: 480px; }
+            .main-image img { height: 100%; object-fit: cover; }
+            .detail-info h1 { font-size: 1.6rem; }
+            .detail-price { font-size: 1.25rem; margin-bottom: 1.5rem; }
+            .detail-desc { font-size: 0.95rem; margin-bottom: 1.5rem; }
+            .selector { margin-bottom: 1.5rem; }
+            .add-to-cart-large { margin-bottom: 1.5rem; }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .detail-info h1 { font-size: 1.4rem; }
+            .size-btn { width: 40px; height: 40px; font-size: 0.78rem; }
+            .detail-price { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body class="page-padded">
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Free Express Shipping on Orders Over $150 | Shop the New Collection</p>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container header-container">
+            <button class="action-btn mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <a href="index.html" class="logo">VENDEX</a>
+            <nav class="nav" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="category_women.html" class="nav-link">Women</a></li>
+                    <li class="nav-item"><a href="category_men.html" class="nav-link">Men</a></li>
+                    <li class="nav-item"><a href="category_accessories.html" class="nav-link">Accessories</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="checkout.html" class="action-btn cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section">
+        <button onclick="history.back()" class="back-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+        
+        <div id="product-skeleton" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-top: 2rem;">
+            <div style="height: 600px; background: #f0f0f0;" class="pulse"></div>
+            <div>
+                <div style="height: 40px; width: 80%; background: #f0f0f0; margin-bottom: 1rem;" class="pulse"></div>
+                <div style="height: 20px; width: 40%; background: #f0f0f0; margin-bottom: 2rem;" class="pulse"></div>
+                <div style="height: 100px; background: #f0f0f0; margin-bottom: 2rem;" class="pulse"></div>
+                <div style="height: 50px; width: 200px; background: #f0f0f0;" class="pulse"></div>
+            </div>
+        </div>
+
+        <div class="product-detail-layout" id="product-content" style="display: none; opacity: 0; transition: opacity 0.5s;">
+            <div class="gallery">
+                <div class="thumbnails" id="dynamic-thumbnails">
+                    <!-- Thumbnails injected here -->
+                </div>
+                <div class="main-image">
+                    <img src="" id="dynamic-main-image" alt="Product Image">
+                </div>
+            </div>
+            
+            <div class="detail-info">
+                <p id="dynamic-category" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-bottom: 0.5rem;"></p>
+                <h1 id="dynamic-title">Loading...</h1>
+                <div class="detail-price" id="dynamic-price"></div>
+                <p class="detail-desc" id="dynamic-desc"></p>
+                
+                <div class="selector">
+                    <h4>Select Size</h4>
+                    <div class="size-btns" id="dynamic-sizes">
+                        <!-- Sizes injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <div class="qty-selector" style="display: flex; border: 1px solid var(--border-color); width: fit-content;">
+                        <button class="qty-btn" id="qty-minus" style="padding: 0.75rem 1.25rem; border: none; background: none; cursor: pointer;">-</button>
+                        <input type="number" value="1" min="1" id="qty-input" style="width: 50px; text-align: center; border: none; font-weight: 600;">
+                        <button class="qty-btn" id="qty-plus" style="padding: 0.75rem 1.25rem; border: none; background: none; cursor: pointer;">+</button>
+                    </div>
+                    <button class="btn btn-primary add-to-cart-large" id="btn-add-to-cart" style="flex: 1; margin-bottom: 0;">Add to Cart</button>
+                </div>
+                
+                <div class="accordion">
+                    <div class="accordion-item">Details & Care <span>+</span></div>
+                    <div class="accordion-item">Shipping & Returns <span>+</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- You May Also Like Section -->
+        <section class="cross-sell-section" id="cross-sell-container" style="display:none;">
+            <h3 class="cross-sell-title">You May Also Like</h3>
+            <div class="category-grid" id="cross-sell-grid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="logo footer-logo">VENDEX</a>
+                <p class="footer-desc">Redefining modern luxury through premium materials, ethical production, and timeless design aesthetics.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Shop</h4>
+                <ul class="footer-links">
+                    <li><a href="category_women.html">New Arrivals</a></li>
+                    <li><a href="category_women.html">Women</a></li>
+                    <li><a href="category_men.html">Men</a></li>
+                    <li><a href="category_accessories.html">Accessories</a></li>
+                    <li><a href="category_women.html">Sale</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Client Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vendex Official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-msg">Item added to cart!</span>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

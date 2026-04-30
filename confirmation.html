@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | Vendex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .confirmation-box { max-width: 600px; margin: 4rem auto; text-align: center; padding: 4rem 2rem; background: white; border: 1px solid var(--border-color); }
+        .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--success); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; }
+        .order-number { margin: 2rem 0; padding: 1rem; background: var(--accent-color); font-weight: 600; font-family: monospace; font-size: 1.125rem; }
+    </style>
+</head>
+<body class="page-padded">
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Free Express Shipping on Orders Over $150 | Shop the New Collection</p>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container header-container">
+            <button class="action-btn mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <a href="index.html" class="logo">VENDEX</a>
+            <nav class="nav" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="category_women.html" class="nav-link">Women</a></li>
+                    <li class="nav-item"><a href="category_men.html" class="nav-link">Men</a></li>
+                    <li class="nav-item"><a href="category_accessories.html" class="nav-link">Accessories</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="checkout.html" class="action-btn cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section">
+        <button onclick="history.back()" class="back-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+        <div class="confirmation-box" id="confirmation-box">
+            <div class="success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h2>Thank You for Your Order!</h2>
+            <p style="color: var(--text-light); margin-top: 1rem;">Your order has been received and is being processed. A confirmation has been recorded.</p>
+            <div class="order-number" id="order-number">Loading order...</div>
+            <div id="order-items-summary" style="text-align:left;margin:1.5rem 0;border-top:1px solid #eee;padding-top:1rem;"></div>
+            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Continue Shopping</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="logo footer-logo">VENDEX</a>
+                <p class="footer-desc">Redefining modern luxury through premium materials, ethical production, and timeless design aesthetics.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Shop</h4>
+                <ul class="footer-links">
+                    <li><a href="category_women.html">New Arrivals</a></li>
+                    <li><a href="category_women.html">Women</a></li>
+                    <li><a href="category_men.html">Men</a></li>
+                    <li><a href="category_accessories.html">Accessories</a></li>
+                    <li><a href="category_women.html">Sale</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Client Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vendex Official. All rights reserved.</p>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    (async () => {
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('order');
+        const orderNum = document.getElementById('order-number');
+        const itemsSummary = document.getElementById('order-items-summary');
+        if (!orderId) {
+            orderNum.textContent = 'Order received!';
+            itemsSummary.style.display = 'none';
+            return;
+        }
+        const order = await VendexDB.getOrder(orderId);
+        if (!order) { orderNum.textContent = '#' + orderId.slice(0,8).toUpperCase(); return; }
+        orderNum.innerHTML = `Order <strong>#${order.id.slice(0,8).toUpperCase()}</strong>`;
+        const items = Array.isArray(order.items) ? order.items : [];
+        if (items.length) {
+            itemsSummary.innerHTML = `<p style="font-size:0.85rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;">Your Items</p>` +
+            items.map(i => `<div style="display:flex;justify-content:space-between;font-size:0.875rem;margin-bottom:0.5rem;"><span>${i.name}${i.size ? ` (${i.size})` : ''} × ${i.qty}</span><span style="font-weight:500;">$${(i.price*i.qty).toFixed(2)}</span></div>`).join('') +
+            `<div style="border-top:1px solid #eee;margin-top:0.75rem;padding-top:0.75rem;display:flex;justify-content:space-between;font-weight:700;"><span>Total</span><span>$${Number(order.total).toFixed(2)}</span></div>`;
+        }
+    })();
+    </script>
+</body>
+</html>

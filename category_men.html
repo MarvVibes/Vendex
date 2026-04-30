@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Collection | Vendex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .page-header { background-color: var(--accent-color); padding: 4rem 0; text-align: center; margin-bottom: 3rem; }
+        .category-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 3rem; }
+        .filter-section { margin-bottom: 2rem; }
+        .filter-title { font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; text-transform: uppercase; font-family: var(--font-sans); font-weight: 600; }
+        .filter-list li { margin-bottom: 0.75rem; }
+        .filter-list label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; cursor: pointer; color: var(--text-light); }
+        .filter-list input { cursor: pointer; width: 16px; height: 16px; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+        .sort-select { padding: 0.5rem; border: 1px solid var(--border-color); font-family: inherit; outline: none; background: transparent; }
+        .mobile-filter-toggle { display: none; }
+        @media (max-width: 1024px) { .category-layout { grid-template-columns: 180px minmax(0, 1fr); gap: 2rem; } }
+        @media (max-width: 768px) {
+            .page-header { padding: 2.5rem 0; margin-bottom: 2rem; }
+            .page-header h1 { font-size: 1.75rem; }
+            .category-layout { grid-template-columns: 1fr; }
+            .filter-sidebar { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: white; z-index: 1300; padding: 5rem 1.5rem 2rem; overflow-y: auto; box-shadow: 5px 0 30px rgba(0,0,0,0.15); transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+            .filter-sidebar.open { left: 0; }
+            .mobile-filter-toggle { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid var(--border-color); background: none; font-family: var(--font-sans); font-size: 0.85rem; cursor: pointer; border-radius: 4px; }
+            .toolbar { gap: 0.75rem; flex-wrap: wrap; }
+        }
+        @media (max-width: 480px) {
+            .page-header { padding: 2rem 0; margin-bottom: 1.5rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .sort-select { font-size: 0.85rem; padding: 0.4rem 0.5rem; }
+        }
+    </style>
+</head>
+<body class="page-padded">
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Free Express Shipping on Orders Over $150 | Shop the New Collection</p>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container header-container">
+            <button class="action-btn mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <a href="index.html" class="logo">VENDEX</a>
+            <nav class="nav" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="category_women.html" class="nav-link">Women</a></li>
+                    <li class="nav-item"><a href="category_men.html" class="nav-link active">Men</a></li>
+                    <li class="nav-item"><a href="category_accessories.html" class="nav-link">Accessories</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="checkout.html" class="action-btn cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <button onclick="history.back()" class="back-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+            <h1>Men's Collection</h1>
+            <p class="section-subtitle">Sharp tailoring meets modern streetwear.</p>
+        </div>
+    </div>
+
+    <main class="container section" style="padding-top: 0;">
+        <div class="category-layout">
+            <aside class="sidebar">
+                <div class="filter-section">
+                    <h3 class="filter-title">Category</h3>
+                    <ul class="filter-list" id="cat-filters">
+                        <li><label><input type="checkbox" value="streetwear"> Streetwear</label></li>
+                        <li><label><input type="checkbox" value="tailoring"> Tailoring</label></li>
+                        <li><label><input type="checkbox" value="casual"> Casual</label></li>
+                    </ul>
+                </div>
+                <div class="filter-section">
+                    <h3 class="filter-title">Price</h3>
+                    <ul class="filter-list" id="price-filters">
+                        <li><label><input type="checkbox" value="under-100"> Under $100</label></li>
+                        <li><label><input type="checkbox" value="100-200"> $100 - $200</label></li>
+                        <li><label><input type="checkbox" value="over-200"> Over $200</label></li>
+                    </ul>
+                </div>
+            </aside>
+            
+            <div class="main-content">
+                <div class="toolbar">
+                    <span id="product-count">Showing 3 results</span>
+                    <select class="sort-select">
+                        <option>Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product-grid" id="product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card filter-item" data-category="streetwear" data-price="under-100">
+                        <a href="product_black-hoodie.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_hoodie.png" alt="Hoodie" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" data-name="Streetwear Hoodie">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">Streetwear</span>
+                            <h3 class="product-title">Heavyweight Black Hoodie</h3>
+                            <div class="product-price"><span class="current-price">$85.00</span></div>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card filter-item" data-category="tailoring" data-price="over-200">
+                        <a href="product_navy-suit.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_suit_folded.png" alt="Navy Suit" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" data-name="Navy Suit">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">Tailoring</span>
+                            <h3 class="product-title">Tailored Navy Blue Suit</h3>
+                            <div class="product-price"><span class="current-price">$340.00</span></div>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="product-card filter-item" data-category="casual" data-price="100-200">
+                        <a href="product_casual-top.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/cat_men.png" alt="Casual Top" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" data-name="Casual Top">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">Casual</span>
+                            <h3 class="product-title">Modern Streetwear Top</h3>
+                            <div class="product-price"><span class="current-price">$120.00</span></div>
+                        </div>
+                    </div>
+
+                    <!-- New Product -->
+                    <div class="product-card filter-item" data-category="casual" data-price="under-100">
+                        <a href="product_linen-shirt.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_linen_shirt.png" alt="Light Blue Linen Shirt" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" aria-label="Add to cart" data-name="Light Blue Linen Shirt" data-price="95.00">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">CASUAL</span>
+                            <h3 class="product-title"><a href="product_linen-shirt.html">Light Blue Linen Shirt</a></h3>
+                            <div class="product-price">
+                                <span class="current-price">$95.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Product -->
+                    <div class="product-card filter-item" data-category="casual" data-price="100-200">
+                        <a href="product_chinos.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_chinos.png" alt="Olive Green Chinos" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" aria-label="Add to cart" data-name="Olive Green Chinos" data-price="110.00">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">CASUAL</span>
+                            <h3 class="product-title"><a href="product_chinos.html">Olive Green Chinos</a></h3>
+                            <div class="product-price">
+                                <span class="current-price">$110.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Product -->
+                    <div class="product-card filter-item" data-category="outerwear" data-price="100-200">
+                        <a href="product_denim-jacket.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_denim_jacket.png" alt="Raw Denim Jacket" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" aria-label="Add to cart" data-name="Raw Denim Jacket" data-price="180.00">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">OUTERWEAR</span>
+                            <h3 class="product-title"><a href="product_denim-jacket.html">Raw Denim Jacket</a></h3>
+                            <div class="product-price">
+                                <span class="current-price">$180.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Product -->
+                    <div class="product-card filter-item" data-category="tailoring" data-price="over-200">
+                        <a href="product_overcoat.html" class="product-link-overlay"></a>
+                        <div class="product-image-container">
+                            <img src="assets/images/product_overcoat.png" alt="Camel Hair Overcoat" class="product-img">
+                            <div class="product-actions">
+                                <button class="quick-add-btn" aria-label="Add to cart" data-name="Camel Hair Overcoat" data-price="550.00">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-vendor">TAILORING</span>
+                            <h3 class="product-title"><a href="product_overcoat.html">Camel Hair Overcoat</a></h3>
+                            <div class="product-price">
+                                <span class="current-price">$550.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="logo footer-logo">VENDEX</a>
+                <p class="footer-desc">Redefining modern luxury through premium materials, ethical production, and timeless design aesthetics.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Shop</h4>
+                <ul class="footer-links">
+                    <li><a href="category_women.html">New Arrivals</a></li>
+                    <li><a href="category_women.html">Women</a></li>
+                    <li><a href="category_men.html">Men</a></li>
+                    <li><a href="category_accessories.html">Accessories</a></li>
+                    <li><a href="category_women.html">Sale</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Client Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vendex Official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-msg">Item added to cart!</span>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

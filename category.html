@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category | Vendex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .category-hero { background: #f9f9f9; padding: 4rem 0; text-align: center; border-bottom: 1px solid var(--border-color); }
+        .category-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .category-hero p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
+        
+        .category-layout { display: grid; grid-template-columns: 240px 1fr; gap: 3rem; margin-top: 3rem; }
+        
+        /* Filters Sidebar */
+        .filters-sidebar h3 { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; color: #999; }
+        .filter-group { margin-bottom: 2.5rem; }
+        .filter-title { font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; }
+        .filter-list { list-style: none; padding: 0; }
+        .filter-item { margin-bottom: 0.75rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; color: var(--text-light); transition: 0.3s; }
+        .filter-item:hover { color: var(--primary-color); }
+        .filter-item input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary-color); }
+
+        /* Toolbar */
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        .results-count { font-size: 0.875rem; color: var(--text-light); }
+        .sort-select { border: none; font-family: inherit; font-size: 0.875rem; cursor: pointer; background: none; font-weight: 500; }
+        
+        .pulse { animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 0.3; } 100% { opacity: 0.6; } }
+
+        @media (max-width: 1024px) {
+            .category-layout { grid-template-columns: 1fr; }
+            .filters-sidebar { display: none; } /* Handled by mobile JS toggle */
+        }
+    </style>
+</head>
+<body class="page-padded">
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Free Express Shipping on Orders Over $150 | Shop the New Collection</p>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container header-container">
+            <button class="action-btn mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <a href="index.html" class="logo">VENDEX</a>
+            <nav class="nav" id="nav-menu">
+                <!-- Injected via main.js -->
+            </nav>
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="checkout.html" class="action-btn cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="category-hero">
+        <div class="container">
+            <h1 id="cat-title">Loading...</h1>
+            <p id="cat-desc">Exploring our latest curated collection...</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="category-layout">
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar">
+                <h3>Filter By</h3>
+                
+                <div class="filter-group">
+                    <div class="filter-title">Price Range</div>
+                    <ul class="filter-list">
+                        <li class="filter-item"><input type="checkbox"> Under $100</li>
+                        <li class="filter-item"><input type="checkbox"> $100 - $250</li>
+                        <li class="filter-item"><input type="checkbox"> $250 - $500</li>
+                        <li class="filter-item"><input type="checkbox"> Over $500</li>
+                    </ul>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Availability</div>
+                    <ul class="filter-list">
+                        <li class="filter-item"><input type="checkbox" checked> In Stock</li>
+                        <li class="filter-item"><input type="checkbox"> Out of Stock</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Product Grid Area -->
+            <div class="product-area">
+                <div class="toolbar">
+                    <div class="results-count" id="results-count">Showing items...</div>
+                    <div class="sort-options">
+                        <span style="font-size: 0.8rem; color: #999; margin-right: 0.5rem;">SORT BY:</span>
+                        <select class="sort-select">
+                            <option>Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="category-grid" id="dynamic-product-grid">
+                    <!-- Skeleton Loader -->
+                    <div class="product-card pulse"><div style="height:400px; background:#f0f0f0; margin-bottom:1rem;"></div></div>
+                    <div class="product-card pulse"><div style="height:400px; background:#f0f0f0; margin-bottom:1rem;"></div></div>
+                    <div class="product-card pulse"><div style="height:400px; background:#f0f0f0; margin-bottom:1rem;"></div></div>
+                    <div class="product-card pulse"><div style="height:400px; background:#f0f0f0; margin-bottom:1rem;"></div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!-- Standard footer content -->
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initDynamicCategory();
+        });
+    </script>
+</body>
+</html>
